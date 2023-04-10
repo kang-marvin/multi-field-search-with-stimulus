@@ -19,7 +19,6 @@ Note, the fields can be in any order.
    - Book Title
    - Book Genre
    - Book Publishing Date
-   - Book Price
    - Book Rating
    - Book Original Language
 ```
