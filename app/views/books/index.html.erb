@@ -3,50 +3,54 @@
   bodyCols = "p-3 font-bold"
 %>
 
-<input
-  type="text"
-  name="keyword"
-  placeholder="Search by keyword"
-  class="
-    shadow border rounded
-    w-full p-6 my-2
-  "
-  id="keyword"
-/>
+<div data-controller="search">
+  <input
+    type="text"
+    id="keyword"
+    name="keyword"
+    placeholder="Search by keyword"
+    class="shadow border rounded w-full p-6 my-2"
+    data-action="input->search#filter"
+  />
 
-<div class="items-center justify-center bg-gray-900 rounded">
-  <div class="overflow-auto lg:overflow-visible">
-    <table class="table text-gray-400 border-separate space-y-6 text-sm">
-      <thead class="bg-gray-800 text-gray-500">
-        <thead>
-          <tr>
-            <th class=<%= headerCols %>>Author Name</th>
-            <th class=<%= headerCols %>>Author Pen Name</th>
-            <th class=<%= headerCols %>>Author Country</th>
-            <th class=<%= headerCols %>>Publisher Name</th>
-            <th class=<%= headerCols %>>Title</th>
-            <th class=<%= headerCols %>>Genre</th>
-            <th class=<%= headerCols %>>Publishing Year</th>
-            <th class=<%= headerCols %>>Rating</th>
-            <th class=<%= headerCols %>>Original Language</th>
-          </tr>
-        </thead>
-        <tbody class="bg-gray-800">
-          <% @books.each do |book| %>
+  <div class="items-center justify-center bg-gray-900 rounded">
+    <div class="overflow-auto lg:overflow-visible">
+      <table class="table text-gray-400 border-separate space-y-6 text-sm">
+        <thead class="bg-gray-800 text-gray-500">
+          <thead>
             <tr>
-              <td class=<%= bodyCols %>><%= book.author_name %></td>
-              <td class=<%= bodyCols %>><%= book.author_pen_name %></td>
-              <td class=<%= bodyCols %>><%= book.author_country_of_origin %></td>
-              <td class=<%= bodyCols %>><%= book.publisher_name %></td>
-              <td class=<%= bodyCols %>><%= book.book_title %></td>
-              <td class=<%= bodyCols %>><%= book.book_genre %></td>
-              <td class=<%= bodyCols %>><%= book.book_publishing_year %></td>
-              <td class=<%= bodyCols %>><%= book.book_rating %></td>
-              <td class=<%= bodyCols %>><%= book.book_original_language %></td>
+              <th class=<%= headerCols %>>Author Name</th>
+              <th class=<%= headerCols %>>Author Pen Name</th>
+              <th class=<%= headerCols %>>Author Country</th>
+              <th class=<%= headerCols %>>Publisher Name</th>
+              <th class=<%= headerCols %>>Title</th>
+              <th class=<%= headerCols %>>Genre</th>
+              <th class=<%= headerCols %>>Publishing Year</th>
+              <th class=<%= headerCols %>>Rating</th>
+              <th class=<%= headerCols %>>Original Language</th>
             </tr>
-          <% end %>
-        </tbody>
-      </thead>
-    </table>
+          </thead>
+          <tbody class="bg-gray-800">
+            <% @books.each do |book| %>
+              <tr data-search-searchable-fields-per-record-value="2">
+                <td class=<%= bodyCols %>><%= book.author_name %></td>
+                <td data-search-target="searchable" class=<%= bodyCols %>>
+                  <%= book.author_pen_name %>
+                </td>
+                <td class=<%= bodyCols %>><%= book.author_country_of_origin %></td>
+                <td class=<%= bodyCols %>><%= book.publisher_name %></td>
+                <td data-search-target="searchable" class=<%= bodyCols %>>
+                  <%= book.book_title %>
+                </td>
+                <td class=<%= bodyCols %>><%= book.book_genre %></td>
+                <td class=<%= bodyCols %>><%= book.book_publishing_year %></td>
+                <td class=<%= bodyCols %>><%= book.book_rating %></td>
+                <td class=<%= bodyCols %>><%= book.book_original_language %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </thead>
+      </table>
+    </div>
   </div>
 </div>
