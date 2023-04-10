@@ -7,9 +7,10 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <script src="https://cdn.tailwindcss.com"></script>
   </head>
 
-  <body>
+  <body class="container mx-auto p-4">
     <%= yield %>
   </body>
 </html>
