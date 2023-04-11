@@ -5,14 +5,22 @@ const MINIMUM_REQUIRED_CHARACTERS_FOR_SEARCH = 3;
 
 export default class extends Controller {
 
-  static targets = ["searchable"]
+  static targets = ["searchable", "listFieldsOutput"]
   static values = {
     searchableFieldsPerRecord: {
       type: Number, default: MINIMUM_SEARCHABLE_FIELDS_PER_RECORD
     }
   }
 
-  connect() {}
+  connect() {
+    this.searchableTargets.slice(
+      0, this.searchableFieldsPerRecordValue
+    ).map(el => el.id).forEach(el => {
+      let elementComponent = document.createElement('span')
+      elementComponent.textContent = `"${el}"`
+      this.listFieldsOutputTarget.appendChild(elementComponent)
+    })
+  }
 
   filter(event) {
     const keyword = event.target.value
