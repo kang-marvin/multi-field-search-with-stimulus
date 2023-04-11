@@ -3,7 +3,10 @@
   bodyCols = "p-3 font-bold"
 %>
 
-<div data-controller="search">
+<div
+  data-controller="search"
+  data-search-searchable-fields-per-record-value="2"
+>
   <input
     type="text"
     id="keyword"
@@ -32,7 +35,7 @@
           </thead>
           <tbody class="bg-gray-800">
             <% @books.each do |book| %>
-              <tr data-search-searchable-fields-per-record-value="2">
+              <tr>
                 <td class=<%= bodyCols %>><%= book.author_name %></td>
                 <td data-search-target="searchable" class=<%= bodyCols %>>
                   <%= book.author_pen_name %>
