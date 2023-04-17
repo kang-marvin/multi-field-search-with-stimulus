@@ -15,7 +15,7 @@ export default class extends Controller {
   connect() {
     this.searchableTargets.slice(
       0, this.searchableFieldsPerRecordValue
-    ).map(el => el.id).forEach(el => {
+    ).map(el => this.#extractIdentifier(el)).forEach(el => {
       let elementComponent = document.createElement('span')
       elementComponent.textContent = `"${el}"`
       this.listFieldsOutputTarget.appendChild(elementComponent)
@@ -58,6 +58,10 @@ export default class extends Controller {
 
   #cleanupContent(content) {
     return content.replace(/(\r\n|\n|\r)/gm,"").trim()
+  }
+
+  #extractIdentifier(elementComponent) {
+    return elementComponent.attributes.key.value
   }
 
 }
