@@ -3,23 +3,9 @@
   bodyCols = "p-3 font-bold"
 %>
 
-<%
-  tableHeaders = [
-    "Author Name",
-    "Author Pen Name",
-    "Author Country",
-    "Publisher Name",
-    "Title",
-    "Genre",
-    "Publishing Year",
-    "Rating",
-    "Original Language"
-  ]
-%>
-
 <div
   data-controller="search"
-  data-search-searchable-fields-per-record-value="4"
+  data-search-searchable-fields-per-record-value="<%= @searchable_fields.size %>"
 >
   <input
     type="text"
@@ -40,31 +26,22 @@
         <thead class="bg-gray-800 text-gray-500">
           <thead>
             <tr>
-              <% tableHeaders.each do |tableHeader| %>
-                <th class=<%= headerCols %>><%= tableHeader %></th>
+              <% @table_fields.each do |header_name| %>
+                <th class=<%= headerCols %>><%= header_text_cleaner(header_name) %></th>
               <% end %>
             </tr>
           </thead>
           <tbody class="bg-gray-800">
             <% @books.each do |book| %>
               <tr>
-                <td data-search-target="searchable" id="author_name" class=<%= bodyCols %>>
-                  <%= book.author_name %>
-                </td>
-                <td data-search-target="searchable" id="author_pen_name" class=<%= bodyCols %>>
-                  <%= book.author_pen_name %>
-                </td>
-                <td id="author_country" class=<%= bodyCols %>><%= book.author_country_of_origin %></td>
-                <td id="publisher_name" class=<%= bodyCols %>><%= book.publisher_name %></td>
-                <td data-search-target="searchable" id="title" class=<%= bodyCols %>>
-                  <%= book.book_title %>
-                </td>
-                <td id="genre" class=<%= bodyCols %>><%= book.book_genre %></td>
-                <td id="publishing_year" class=<%= bodyCols %>><%= book.book_publishing_year %></td>
-                <td id="rating" class=<%= bodyCols %>><%= book.book_rating %></td>
-                <td data-search-target="searchable" id="original_language" class=<%= bodyCols %>>
-                  <%= book.book_original_language %>
-                </td>
+                <% @table_fields.each do |field_name| %>
+                  <%= table_row_data_builder(
+                    object: book,
+                    attribute: field_name,
+                    searchable_fields: @searchable_fields,
+                    class_name: bodyCols
+                  ) %>
+                <% end %>
               </tr>
             <% end %>
           </tbody>
