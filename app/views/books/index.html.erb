@@ -3,6 +3,20 @@
   bodyCols = "p-3 font-bold"
 %>
 
+<%
+  tableHeaders = [
+    "Author Name",
+    "Author Pen Name",
+    "Author Country",
+    "Publisher Name",
+    "Title",
+    "Genre",
+    "Publishing Year",
+    "Rating",
+    "Original Language"
+  ]
+%>
+
 <div
   data-controller="search"
   data-search-searchable-fields-per-record-value="4"
@@ -26,15 +40,9 @@
         <thead class="bg-gray-800 text-gray-500">
           <thead>
             <tr>
-              <th class=<%= headerCols %>>Author Name</th>
-              <th class=<%= headerCols %>>Author Pen Name</th>
-              <th class=<%= headerCols %>>Author Country</th>
-              <th class=<%= headerCols %>>Publisher Name</th>
-              <th class=<%= headerCols %>>Title</th>
-              <th class=<%= headerCols %>>Genre</th>
-              <th class=<%= headerCols %>>Publishing Year</th>
-              <th class=<%= headerCols %>>Rating</th>
-              <th class=<%= headerCols %>>Original Language</th>
+              <% tableHeaders.each do |tableHeader| %>
+                <th class=<%= headerCols %>><%= tableHeader %></th>
+              <% end %>
             </tr>
           </thead>
           <tbody class="bg-gray-800">
